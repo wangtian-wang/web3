@@ -3,7 +3,7 @@ require("@nomiclabs/hardhat-etherscan"); // verfiy contract
 require("./tasks/block-id");
 const path = require("path");
 const Dotenv = require("dotenv");
-const devConfigs = Dotenv.config({
+Dotenv.config({
   path: path.resolve(__dirname, "./.env"),
   encoding: "utf-8",
   debug: false,
