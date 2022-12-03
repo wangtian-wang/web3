@@ -4,7 +4,7 @@
 // module.exports.default = deployFundMe
 // 部署的函数 必须挂载到exports对象的default属性上,既默认只导出为一个函数
 
-const { network } = require('hardhat');
+const { network,ethers } = require('hardhat');
 const { networkConfig, developmentChains } = require('../helper-hardhat-config.js');
 const { verify } = require("../utils/verify.js");
 const Dotenv = require("dotenv");
@@ -22,14 +22,21 @@ module.exports = async (hardhat:any) => {
     const chainId = network.config.chainId; // 得到使用--network goerli 指定网络的id
     let ethUsdPriceFeedAddress;
     if (chainId === 31337) {
-        const ethUsdAggregator = await deployments.get("MockV3Aggregator");
-        ethUsdPriceFeedAddress = ethUsdAggregator.address;
-        console.log('address form local  MockV3Aggregator', ethUsdPriceFeedAddress);
+        console.log(deployments, '-------------------')
+
+        // const ethUsdAggregator = await deployments.get("MockV3Aggregator");
+        // console.log(ethUsdAggregator, '-------------------')
+        // ethUsdPriceFeedAddress = ethUsdAggregator.address;
+        // console.log('address form local  MockV3Aggregator', ethUsdPriceFeedAddress);
 
     } else {
         ethUsdPriceFeedAddress = networkConfig[chainId].ethUsdPriceFeed;
         console.log('address form other testnet', ethUsdPriceFeedAddress);
     }  
+    // if (!ethUsdPriceFeedAddress) {
+    //     console.log('----no --args----');
+    //     process.exit(1)
+    // }
     
     const fundme = await deploy('FundMe', {
         from: deployer,
