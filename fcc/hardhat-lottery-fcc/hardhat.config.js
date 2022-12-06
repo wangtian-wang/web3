@@ -62,16 +62,16 @@ module.exports = {
             goerli: ETHERSCAN_API_KEY,
             polygon: POLYGON_API_KEY,
         },
-        customChains: [
-            {
-                network: "goerli",
-                chainId: 5,
-                urls: {
-                    apiURL: "https://api-goerli.etherscan.io/api",
-                    browserURL: "https://goerli.etherscan.io",
-                },
-            },
-        ],
+        // customChains: [
+        //     {
+        //         network: "goerli",
+        //         chainId: 5,
+        //         urls: {
+        //             apiURL: "https://api-goerli.etherscan.io/api",
+        //             browserURL: "https://goerli.etherscan.io",
+        //         },
+        //     },
+        // ],
     },
     solidity: {
         compilers: [
@@ -82,5 +82,9 @@ module.exports = {
                 version: "0.4.24",
             },
         ],
+    },
+    contractSizer: {
+        runOnCompile: false,
+        only: ["Lottery"],
     },
 }

@@ -13,7 +13,7 @@ error L_TransferFailed();
 error L_SenderMoreToLottery();
 error L_LotteryNotOpen();
 
-abstract contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
+contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
     enum LotteryState {
         OPEN,
         CALCULATING
@@ -68,11 +68,12 @@ abstract contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
         emit LotteryEnter(msg.sender);
     }
 
-    function checkUpKeep(
+    function checkUpkeep(
         bytes memory /* checkData */
     )
         public
         view
+        override
         returns (
             bool upkeepNeeded,
             bytes memory /* performData */
@@ -89,7 +90,7 @@ abstract contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
     function performUpkeep(
         bytes calldata /* performData */
     ) external override {
-        (bool upkeepNeeded, ) = checkUpKeep("");
+        (bool upkeepNeeded, ) = checkUpkeep("");
         if (!upkeepNeeded) {
             revert L_UpkeepNotNeed(
                 address(this).balance,
