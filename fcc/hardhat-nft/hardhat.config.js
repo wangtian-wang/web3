@@ -4,7 +4,7 @@ require("hardhat-gas-reporter")
 require("@nomiclabs/hardhat-etherscan")
 require("solidity-coverage")
 require("hardhat-deploy")
-
+console.log("main config exec!!!")
 const GOERLI_RPC_URL =
     process.env.GOERLI_RPC_URL || "https://eth-goerli.alchemyapi.io/v2/your-api-key"
 const PRIVATE_KEY = process.env.PRIVATE_KEY || ""
